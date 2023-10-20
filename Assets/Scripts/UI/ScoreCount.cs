@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Boosters;
+using Agava.YandexGames;
 
 namespace Assets.Scripts.UI
 {
@@ -69,8 +70,27 @@ namespace Assets.Scripts.UI
             {
                 _level++;
                 LevelRised?.Invoke();
-                CreateBooster();
+                //CreateBooster();
+                ShowInterstitial();
             }            
+        }
+
+        private void ShowInterstitial()
+        {
+            InterstitialAd.Show(OnAddOpen, OnAddClose);
+        }
+
+        private void OnAddClose(bool obj)
+        {
+            AudioListener.volume = 1;
+            Time.timeScale = 1;
+            CreateBooster();
+        }
+
+        private void OnAddOpen()
+        {
+            AudioListener.volume = 0;
+            Time.timeScale = 0;
         }
 
         private void CreateBooster()

@@ -7,7 +7,7 @@ namespace Assets.Scripts.Platforms
 {
     public class RedPlatform : Platform
     {
-        private int _maxCount = 1;
+        private int _maxCount = 4;
         private bool _isCollected;
         private List<RedFrog> _frogs = new List<RedFrog>();
 
@@ -15,8 +15,8 @@ namespace Assets.Scripts.Platforms
 
         private void Awake()
         {
-            _rightBorder = new Vector3(1.65f, 2f, 0);
-            _leftBorder = new Vector3(-1.65f, 2f, 0);
+            _rightBorder = new Vector3(1.65f, 1.7f, 0);
+            _leftBorder = new Vector3(-1.65f, 1.7f, 0);
             _startSpeed = 0.9f;
         }
 
@@ -25,7 +25,7 @@ namespace Assets.Scripts.Platforms
             if (collision.TryGetComponent(out RedCounter redFrog))
             {
                 var frog = redFrog.GetComponentInParent<RedFrog>();
-                frog.transform.parent = this.transform;
+                //frog.transform.parent = this.transform;
                 _frogs.Add(frog);
                 Invoke(nameof(CheckCount), 0.5f);
             }
@@ -36,6 +36,7 @@ namespace Assets.Scripts.Platforms
             if (collision.TryGetComponent(out RedCounter redFrog) && _isCollected == false)
             {
                 var frog = redFrog.GetComponentInParent<RedFrog>();
+                //frog.transform.parent = null;
                 _frogs.Remove(frog);
             }
         }

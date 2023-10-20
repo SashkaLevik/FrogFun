@@ -208,11 +208,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _magnet: {fileID: 2727111987466901278}
-  _collider: {fileID: 1764683638008203878}
   _collidePoint: {fileID: 5568920035305256835}
-  _rangeX: 2
+  _rangeX: 2.3
   _rangeY: 3
   _frogLayer:
     serializedVersion: 2
     m_Bits: 10747904
-  _frogColliders: []
+  _frogs: []

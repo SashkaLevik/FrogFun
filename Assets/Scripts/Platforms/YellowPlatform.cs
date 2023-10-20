@@ -8,7 +8,7 @@ namespace Assets.Scripts.Platforms
 {
     public class YellowPlatform : Platform
     {
-        private int _maxCount = 1;
+        private int _maxCount = 3;
         private bool _isCollected;
         private List<YellowFrog> _frogs = new List<YellowFrog>();
 
@@ -16,8 +16,8 @@ namespace Assets.Scripts.Platforms
 
         private void Awake()
         {
-            _rightBorder = new Vector3(1.65f, -0.5f, 0);
-            _leftBorder = new Vector3(-1.65f, -0.5f, 0);
+            _rightBorder = new Vector3(1.65f, -1f, 0);
+            _leftBorder = new Vector3(-1.65f, -1f, 0);
             _startSpeed = 0.5f;
         }
 
@@ -26,9 +26,8 @@ namespace Assets.Scripts.Platforms
             if (collision.TryGetComponent(out YellowCounter yellowFrog))
             {
                 var frog = yellowFrog.GetComponentInParent<YellowFrog>();
-                frog.transform.parent = this.transform;
+                //frog.transform.parent = this.transform;
                 _frogs.Add(frog);
-                _frogsCount++;
                 Invoke(nameof(CheckCount), 0.5f);
             }
         }
@@ -38,8 +37,8 @@ namespace Assets.Scripts.Platforms
             if (collision.TryGetComponent(out YellowCounter yellowFrog) && _isCollected == false)
             {
                 var frog = yellowFrog.GetComponentInParent<YellowFrog>();
+                //frog.transform.parent = null;
                 _frogs.Remove(frog);
-                _frogsCount--;
             }
         }
 

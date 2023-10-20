@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Agava.YandexGames;
 
 namespace Assets.Scripts.UI
 {
@@ -15,9 +16,15 @@ namespace Assets.Scripts.UI
 
         private void Start()
         {
-            if (PlayerPrefs.HasKey(Active))
+            YandexGamesSdk.GameReady();
+
+            if (UnityEngine.PlayerPrefs.HasKey(Active))
             {
-                _playText.text = "Continue";
+                if (Application.systemLanguage == SystemLanguage.Russian)
+                    _playText.text = "Продолжить";
+                else if(Application.systemLanguage == SystemLanguage.English)
+                    _playText.text = "Continue";
+
                 _newGame.gameObject.SetActive(true);
             }
         }
@@ -30,15 +37,15 @@ namespace Assets.Scripts.UI
 
         private void StartNew()
         {
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.SetString(Active, "Game");
-            SceneManager.LoadScene(1);
+            UnityEngine.PlayerPrefs.DeleteAll();
+            UnityEngine.PlayerPrefs.SetString(Active, "Game");
+            SceneManager.LoadScene(2);
         }
 
         private void StartGame()
         {
-            PlayerPrefs.SetString(Active, "Game");
-            SceneManager.LoadScene(1);
+            UnityEngine.PlayerPrefs.SetString(Active, "Game");
+            SceneManager.LoadScene(2);
         }
     }
 }

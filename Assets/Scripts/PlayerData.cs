@@ -1,18 +1,20 @@
-﻿using System;
+﻿using TMPro;
+using UnityEngine;
 
 
 namespace Assets.Scripts
 {
-    [Serializable]
-    public class PlayerData
+    public class PlayerData : MonoBehaviour
     {
-        public int Level;
-        public int Score;
+        [SerializeField] private TMP_Text _name;
+        [SerializeField] private TMP_Text _rank;
+        [SerializeField] private TMP_Text _score;
 
-        public PlayerData()
+        public void Initialize(string name, int rank, int score)
         {
-            Level = 0;
-            Score = 0;
+            _name.text = name;
+            _rank.text = rank.ToString();
+            _score.text = score.ToString();
         }
     }    
 }

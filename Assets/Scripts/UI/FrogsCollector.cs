@@ -16,7 +16,7 @@ namespace Assets.Scripts.UI
         [SerializeField] private RedPlatform _redPlatform;
 
         private int _yellowAmount, _blueAmount, _redAmount;
-        private int _maxYellow = 1, _maxBlue = 1, _maxRed = 1;
+        private int _maxYellow = 12, _maxBlue = 12, _maxRed = 12;
 
         public event UnityAction OnScoreCollected; 
 
