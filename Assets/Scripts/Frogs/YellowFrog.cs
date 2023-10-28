@@ -7,7 +7,8 @@ namespace Assets.Scripts.Frogs
     {
         private void Awake()
         {
-            _minScale = 0.08f;
+            _minScale = 0.4f;
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         protected override void OnTriggerEnter2D(Collider2D collision)

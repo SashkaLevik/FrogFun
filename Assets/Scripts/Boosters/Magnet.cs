@@ -12,6 +12,7 @@ namespace Assets.Scripts.Boosters
         [SerializeField] private float _rangeX;
         [SerializeField] private float _rangeY;
         [SerializeField] private LayerMask _frogLayer;
+        [SerializeField] private AudioSource _atttaction;
 
         private float _pullSpeed = 525f;
         public Collider2D[] _frogs;
@@ -19,7 +20,8 @@ namespace Assets.Scripts.Boosters
         private void Start()
         {
             FindFrogs();
-            Invoke(nameof(Destroy), 3f);
+            _atttaction.Play();
+            Invoke(nameof(Destroy), 2f);
         }        
 
         private void FindFrogs()

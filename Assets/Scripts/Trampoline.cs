@@ -9,14 +9,18 @@ namespace Assets.Scripts
     {
         [SerializeField] private Slider _slider;
         
-        private Vector3 _rightBorder = new Vector3(1.65f, -4.4f, 0);
-        private Vector3 _leftBorder = new Vector3(-1.65f, -4.4f, 0);
+        private Vector3 _rightBorder = new Vector3(2f, -4.4f, 0);
+        private Vector3 _leftBorder = new Vector3(-2f, -4.4f, 0);
+        private Animator _animator;
+        private SpriteRenderer _spriteRenderer;
 
         public event UnityAction<float> SliderChanged;
         public event UnityAction FrogThrowed;
 
         private void Start()
         {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
             StartCoroutine(Move());
         }
 
@@ -35,8 +39,9 @@ namespace Assets.Scripts
             while (true)
             {
                 yield return MoveToTarget(transform, _rightBorder);
-
+                if (transform.position == _rightBorder) _spriteRenderer.flipX = true;
                 yield return MoveToTarget(transform, _leftBorder);
+                if (transform.position == _leftBorder) _spriteRenderer.flipX = false;
             }
         }
 
@@ -45,6 +50,7 @@ namespace Assets.Scripts
             while (obj.position != target)
             {
                 obj.position = Vector3.MoveTowards(obj.position, target, Time.deltaTime);
+                
                 yield return null;
             }            
         }

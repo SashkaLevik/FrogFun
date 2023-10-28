@@ -6,11 +6,13 @@ namespace Assets.Scripts.Boosters
     public class BoosterView : MonoBehaviour
     {
         [SerializeField] private BoosterController _target;
+        [SerializeField] private AudioSource _jingle;
 
         private float _speed = 3f;
 
         private void Start()
         {
+            _jingle.Play();
             StartCoroutine(Move());
         }
 

@@ -14,11 +14,24 @@ namespace Assets.Scripts.UI
         [SerializeField] private YellowPlatform _yellowPlatform;
         [SerializeField] private BluePlatform _bluePlatform;
         [SerializeField] private RedPlatform _redPlatform;
+        [SerializeField] private SaveLoad _saveLoad;
 
         private int _yellowAmount, _blueAmount, _redAmount;
         private int _maxYellow = 12, _maxBlue = 12, _maxRed = 12;
 
-        public event UnityAction OnScoreCollected; 
+        public int YellowAmount => _yellowAmount;
+        public int BlueAmount => _blueAmount;
+        public int RedAmount => _redAmount;
+
+        public event UnityAction OnScoreCollected;
+
+        private void Start()
+        {
+            _saveLoad.Load();
+            _yellowFrogsCount.text = _yellowAmount.ToString();
+            _blueFrogsCount.text = _blueAmount.ToString();
+            _redFrogsCount.text = _redAmount.ToString();
+        }
 
         private void OnEnable()
         {
@@ -34,6 +47,10 @@ namespace Assets.Scripts.UI
             _redPlatform.RedFrogsCollected -= CollectRed;
         }
 
+        public void InitYellow(int amount) => _yellowAmount = amount;
+        public void InitBlue(int amount) => _blueAmount = amount;
+        public void InitRed(int amount) => _redAmount = amount;
+
         private void CollectYellow(int frogs)
         {
             _yellowAmount += frogs;
@@ -41,6 +58,7 @@ namespace Assets.Scripts.UI
             if (RiseScore(_yellowAmount, _maxYellow))
                 _yellowAmount = 0;
 
+            _saveLoad.Save();
             _yellowFrogsCount.text = _yellowAmount.ToString();
         }
 
@@ -51,6 +69,7 @@ namespace Assets.Scripts.UI
             if (RiseScore(_blueAmount, _maxBlue))
                 _blueAmount = 0;
 
+            _saveLoad.Save();
             _blueFrogsCount.text = _blueAmount.ToString();
         }
 
@@ -61,6 +80,7 @@ namespace Assets.Scripts.UI
             if (RiseScore(_redAmount, _maxRed))
                 _redAmount = 0;
 
+            _saveLoad.Save();
             _redFrogsCount.text = _redAmount.ToString();
         }
 

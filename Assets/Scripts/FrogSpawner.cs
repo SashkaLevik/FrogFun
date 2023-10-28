@@ -34,6 +34,14 @@ namespace Assets.Scripts
             _booster.BombCreated -= SetBomb;
         }
 
+        public void FillSwamp(Transform swamp)
+        {
+            _frog = Instantiate(GetRandomFrog(), swamp.position, Quaternion.identity);
+            _frog.EnableColliders();
+            _frog.InitTrampoline(_trampoline);
+            _frog.StartChangeScale();
+        }
+
         private void Spawn()
             => Invoke(nameof(SpawnFrog), 0.6f);
 

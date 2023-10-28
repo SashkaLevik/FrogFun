@@ -20,7 +20,7 @@ namespace Assets.Scripts.UI
         private int _score;
         private int _level;
         private int _maxLevel = 5;
-        private int _scoreRiseAmount = 10;
+        private int _scoreRiseAmount = 25;
         private int _levelRiseAmount;
         private BoosterView _booster;
         public int Score => _score;
@@ -32,7 +32,7 @@ namespace Assets.Scripts.UI
         {
             _saveLoad.Load();
             _scoreText.text = _score.ToString();
-            _levelRiseAmount = (_level + 1) * 100;
+            _levelRiseAmount = (_level + 1) * 50;
         }
 
         private void OnEnable()
@@ -66,13 +66,12 @@ namespace Assets.Scripts.UI
 
         private void RiseLevel()
         {
-            if (_level <= _maxLevel)
-            {
-                _level++;
-                LevelRised?.Invoke();
-                //CreateBooster();
-                ShowInterstitial();
-            }            
+            _level++;
+            LevelRised?.Invoke();
+            Debug.Log("LevelRised");
+            //CreateBooster();
+            _levelRiseAmount = (_level + 1) * 50;
+            ShowInterstitial();
         }
 
         private void ShowInterstitial()

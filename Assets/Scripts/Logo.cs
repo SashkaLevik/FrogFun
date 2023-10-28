@@ -6,15 +6,12 @@ namespace Assets.Scripts
     public class Logo : MonoBehaviour
     {
         [SerializeField] private AudioSource _buttons;
-        [SerializeField] private GameObject _logoPanel;       
+        [SerializeField] private GameObject _logoPanel;
 
-        public void PlayButtons()
-            => _buttons.Play();
+        public void LoadMenu() => Invoke(nameof(HideLogo), 1.5f);
 
-        public void HideLogo()
-        {
-            SceneManager.LoadScene(1);
-            //_logoPanel.SetActive(false);
-        }
+        public void PlayButtons() => _buttons.Play();
+
+        private void HideLogo() => SceneManager.LoadScene(1);
     }
 }

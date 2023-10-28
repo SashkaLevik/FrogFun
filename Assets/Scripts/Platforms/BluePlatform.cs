@@ -7,7 +7,7 @@ namespace Assets.Scripts.Platforms
 {
     public class BluePlatform : Platform
     {
-        private int _maxCount = 4;
+        private int _maxCount = 3;
         private bool _isCollected;
         private List<BlueFrog> _frogs = new List<BlueFrog>();
 
@@ -17,7 +17,7 @@ namespace Assets.Scripts.Platforms
         {
             _rightBorder = new Vector3(1.65f, 0.5f, 0);
             _leftBorder = new Vector3(-1.65f, 0.5f, 0);
-            _startSpeed = 0.7f;
+            _startSpeed = 0.6f;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -25,7 +25,6 @@ namespace Assets.Scripts.Platforms
             if (collision.TryGetComponent(out BlueCounter blueFrog))
             {
                 var frog = blueFrog.GetComponentInParent<BlueFrog>();
-                //frog.transform.parent = this.transform;
                 _frogs.Add(frog);
                 Invoke(nameof(CheckCount), 0.5f);
             }
@@ -36,7 +35,6 @@ namespace Assets.Scripts.Platforms
             if (collision.TryGetComponent(out BlueCounter blueFrog) && _isCollected == false)
             {
                 var frog = blueFrog.GetComponentInParent<BlueFrog>();
-                //frog.transform.parent = null;
                 _frogs.Remove(frog);
             }
         }

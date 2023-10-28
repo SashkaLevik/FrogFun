@@ -8,7 +8,7 @@ namespace Assets.Scripts.Platforms
     {
         [SerializeField] protected ScoreCount _score;
 
-        //private int _maxSpeedLevel = 5;
+        private float _maxSpeed = 1f;
         protected Vector3 _rightBorder;
         protected Vector3 _leftBorder;
         protected float _speed;
@@ -23,7 +23,7 @@ namespace Assets.Scripts.Platforms
             {
                 _startSpeed += _score.Level * _speedRiseIndex;
             }
-            _speed = _startSpeed;
+            if(_speed < _maxSpeed) _speed = _startSpeed;
 
             StartCoroutine(Move());
         }
@@ -54,7 +54,10 @@ namespace Assets.Scripts.Platforms
 
         protected void IncreaseSpeed()
         {
-            _speed = _startSpeed + (_score.Level * _speedRiseIndex);
+            if (_speed < _maxSpeed)
+            {
+                _speed = _startSpeed + (_score.Level * _speedRiseIndex);
+            }
         }
     }
 }

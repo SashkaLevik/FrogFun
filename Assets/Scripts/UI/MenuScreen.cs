@@ -14,20 +14,18 @@ namespace Assets.Scripts.UI
         [SerializeField] private Button _newGame;
         [SerializeField] private TMP_Text _playText;
 
-        private void Start()
-        {
-            YandexGamesSdk.GameReady();
+        //private void Start()
+        //{
+        //    if (UnityEngine.PlayerPrefs.HasKey(Active))
+        //    {
+        //        if (Application.systemLanguage == SystemLanguage.Russian)
+        //            _playText.text = "Продолжить";
+        //        else if (Application.systemLanguage == SystemLanguage.English)
+        //            _playText.text = "Continue";
 
-            if (UnityEngine.PlayerPrefs.HasKey(Active))
-            {
-                if (Application.systemLanguage == SystemLanguage.Russian)
-                    _playText.text = "Продолжить";
-                else if(Application.systemLanguage == SystemLanguage.English)
-                    _playText.text = "Continue";
-
-                _newGame.gameObject.SetActive(true);
-            }
-        }
+        //        _newGame.gameObject.SetActive(true);
+        //    }
+        //}
 
         private void OnEnable()
         {
@@ -38,13 +36,13 @@ namespace Assets.Scripts.UI
         private void StartNew()
         {
             UnityEngine.PlayerPrefs.DeleteAll();
-            UnityEngine.PlayerPrefs.SetString(Active, "Game");
+            //UnityEngine.PlayerPrefs.SetString(Active, "Game");
             SceneManager.LoadScene(2);
         }
 
         private void StartGame()
         {
-            UnityEngine.PlayerPrefs.SetString(Active, "Game");
+            //UnityEngine.PlayerPrefs.SetString(Active, "Game");
             SceneManager.LoadScene(2);
         }
     }

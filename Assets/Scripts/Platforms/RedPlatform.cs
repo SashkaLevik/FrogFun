@@ -7,7 +7,7 @@ namespace Assets.Scripts.Platforms
 {
     public class RedPlatform : Platform
     {
-        private int _maxCount = 4;
+        private int _maxCount = 3;
         private bool _isCollected;
         private List<RedFrog> _frogs = new List<RedFrog>();
 
@@ -17,7 +17,7 @@ namespace Assets.Scripts.Platforms
         {
             _rightBorder = new Vector3(1.65f, 1.7f, 0);
             _leftBorder = new Vector3(-1.65f, 1.7f, 0);
-            _startSpeed = 0.9f;
+            _startSpeed = 0.7f;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

@@ -11,6 +11,8 @@ namespace Assets.Scripts.Boosters
         [SerializeField] private Trampoline _trampoline;
         [SerializeField] private LayerMask _frogLayer;
         [SerializeField] private CircleCollider2D _swampCollider;
+        [SerializeField] private AudioSource _explode;
+        [SerializeField] private GameObject _boomAnim;
 
         public Collider2D[] _frogs;
         private Rigidbody2D _rigidbody;
@@ -18,7 +20,8 @@ namespace Assets.Scripts.Boosters
 
         private void Start()
         {
-            _rigidbody = GetComponent<Rigidbody2D>();            
+            _rigidbody = GetComponent<Rigidbody2D>();
+            //Invoke(nameof(Explode), 4f);
         }
         
         private void OnTriggerEnter2D(Collider2D collision)
@@ -27,10 +30,9 @@ namespace Assets.Scripts.Boosters
             {
                 EnableSwampTrigger();
                 StartCoroutine(Explode());
-                //Invoke(nameof(Destroy), 3.2f);
             }
         }
-
+        
         private void EnableSwampTrigger()
         {
             _swampCollider.gameObject.SetActive(true);
@@ -54,18 +56,36 @@ namespace Assets.Scripts.Boosters
         private void FindFrogs()
             => _frogs = Physics2D.OverlapCircleAll(transform.position, _radius, _frogLayer);
 
+        //private void Explode()
+        //{
+        //    _frogs = Physics2D.OverlapCircleAll(transform.position, _radius, _frogLayer);
+
+        //    for (int i = 0; i < _frogs.Length; i++)
+        //    {
+        //        if (_frogs[i] != null)
+        //        {
+        //            _frogs[i].GetComponent<Frog>().Die();
+        //        }
+        //    }
+        //}
+
         private IEnumerator Explode()
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             FindFrogs();
+            Instantiate(_boomAnim, transform.position, Quaternion.identity);
+            _explode.Play();
+            //Collider2D[] frogs = Physics2D.OverlapCircleAll(transform.position, _radius, _frogLayer);
 
             foreach (var frog in _frogs)
             {
-                Destroy(frog.gameObject);
+                if (frog != null) frog.GetComponent<Frog>().Die();
             }
+            yield return new WaitForSeconds(0.7f);
+            DestroyBomb();
+            //Invoke(nameof(DestroyBomb), 0.3f);
         }
 
-        private void Destroy()
-            => Destroy(gameObject);
+        private void DestroyBomb() => Destroy(gameObject);
     }
 }
